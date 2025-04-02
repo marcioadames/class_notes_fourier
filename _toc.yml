@@ -6,3 +6,4 @@ root: Intro
 chapters:
 - file: Series_periodo_pi
 - file: Series_periodo_qualquer
+- file: Expansao_par_impar

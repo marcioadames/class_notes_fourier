@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Expansão de meia escala &#8212; My sample book</title>
+    <title>Série de fourier complexa &#8212; My sample book</title>
   
   
   
@@ -59,11 +59,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Expansao_par_impar';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Serie_Fourier_complexa';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Série de fourier complexa" href="Serie_Fourier_complexa.html" />
-    <link rel="prev" title="Série de Fourier de funções de período \(p = 2L\)" href="Series_periodo_qualquer.html" />
+    <link rel="prev" title="Expansão de meia escala" href="Expansao_par_impar.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -184,8 +183,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Series_periodo_pi.html">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(2\pi\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Series_periodo_qualquer.html">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(p = 2L\)</span></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Expansão de meia escala</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Serie_Fourier_complexa.html">Série de fourier complexa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Expansao_par_impar.html">Expansão de meia escala</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Série de fourier complexa</a></li>
 </ul>
 
     </div>
@@ -257,7 +256,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FExpansao_par_impar.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FSerie_Fourier_complexa.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -287,7 +286,7 @@
       
       
       
-      <li><a href="_sources/Expansao_par_impar.ipynb" target="_blank"
+      <li><a href="_sources/Serie_Fourier_complexa.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +368,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Expansão de meia escala</h1>
+    <h1>Série de fourier complexa</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,8 +382,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="expansao-de-meia-escala">
-<h1>Expansão de meia escala<a class="headerlink" href="#expansao-de-meia-escala" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="serie-de-fourier-complexa">
+<h1>Série de fourier complexa<a class="headerlink" href="#serie-de-fourier-complexa" title="Link to this heading">#</a></h1>
 <p>Podemos usar a célula abaixo para criar séries com coeficientes <span class="math notranslate nohighlight">\(a_n\)</span> e <span class="math notranslate nohighlight">\(b_n\)</span>. Use para testar os coeficientes que encontrou</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -392,42 +391,38 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1">#semi-período</span>
-<span class="n">L</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
-<span class="c1">#número de cosenos e senos na série </span>
-<span class="n">num_termos</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="c1">#número de exponenciais é 2num_termos +1  </span>
+<span class="n">num_termos</span> <span class="o">=</span> <span class="mi">50</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
 
 <span class="c1">#y = np.heaviside(x,0)*(x-np.pi)**2/np.pi+np.heaviside(-x,0)*(x+np.pi)**2/np.pi</span>
 
-<span class="c1"># a0 inicial da série</span>
-<span class="n">a0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
 
-<span class="k">def</span> <span class="nf">an</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">n</span>
+<span class="k">def</span> <span class="nf">cn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
    
-<span class="k">def</span> <span class="nf">bn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">value</span>
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="n">fun</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">a0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">fun</span> <span class="o">=</span> <span class="n">fun</span><span class="o">+</span><span class="n">an</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">+</span><span class="n">bn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">fun</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">x</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+         <span class="n">fun</span> <span class="o">=</span> <span class="n">fun</span><span class="o">+</span><span class="n">cn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fun</span>
 
-<span class="n">y2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num_termos</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num_termos</span><span class="p">))</span>
 
 <span class="c1">#plt.plot(x, y)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/52bf584c629c3b90a822e8f7a966f48d487814ed531fb97eceecc9ff0cfb21bd.png" src="_images/52bf584c629c3b90a822e8f7a966f48d487814ed531fb97eceecc9ff0cfb21bd.png" />
+<img alt="_images/1faa24f3e26fdafe86e3df50979a9edb762a2a96636009f7cea993721653a7af.png" src="_images/1faa24f3e26fdafe86e3df50979a9edb762a2a96636009f7cea993721653a7af.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -448,64 +443,50 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1">#semi-período</span>
-<span class="n">L</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
 <span class="c1">#número de cosenos e senos na série </span>
 <span class="n">num_termos</span> <span class="o">=</span> <span class="mi">20</span>
 
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
 
-<span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">L</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">1500</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">an</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">size</span>
-    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">value</span><span class="o">=</span><span class="n">value</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">*</span><span class="mi">2</span>
-    <span class="k">return</span> <span class="n">value</span>
+<span class="k">def</span> <span class="nf">cn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">size</span>
    
-<span class="k">def</span> <span class="nf">bn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mi">2</span>
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="n">fun</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">x</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">fun</span> <span class="o">=</span> <span class="n">fun</span><span class="o">+</span><span class="n">an</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fun</span>
-
-
-<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="n">fun</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">x</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">fun</span> <span class="o">=</span> <span class="n">fun</span><span class="o">+</span><span class="n">bn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+         <span class="n">fun</span> <span class="o">=</span> <span class="n">fun</span><span class="o">+</span><span class="n">cn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fun</span>
 
 
 <span class="n">y2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">num_termos</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Expansão par&#39;</span><span class="p">)</span>
+<span class="n">y_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Parte real&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span><span class="o">+</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="n">y_r</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_r</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">y_r</span><span class="p">)</span><span class="o">+</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">y2</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">num_termos</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Expansão ímpar&#39;</span><span class="p">)</span>
+<span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Parte imaginária&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span><span class="o">+</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="n">y_r</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">y_r</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">y_i</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/da3ecc50db524386e5ad536150756453e3d04eddcee1091b1424dca127f683d1.png" src="_images/da3ecc50db524386e5ad536150756453e3d04eddcee1091b1424dca127f683d1.png" />
-<img alt="_images/60b6444d041531d8df137560b65419d3a4af816f7f378b57ba17fb45844724f1.png" src="_images/60b6444d041531d8df137560b65419d3a4af816f7f378b57ba17fb45844724f1.png" />
+<img alt="_images/be234695b5971e7b7564782a5d92c0dfc239d8d0b54e1d6af3f25a2a13a88b86.png" src="_images/be234695b5971e7b7564782a5d92c0dfc239d8d0b54e1d6af3f25a2a13a88b86.png" />
+<img alt="_images/3021de024099fca32a5c5dd210657962a47b02222a7e15320536832e937aa0ff.png" src="_images/3021de024099fca32a5c5dd210657962a47b02222a7e15320536832e937aa0ff.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -531,60 +512,47 @@ document.write(`
 <span class="n">num_termos</span> <span class="o">=</span> <span class="mi">20</span>
 
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
 
 <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">L</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">1500</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">an</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">size</span>
-    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">value</span><span class="o">=</span><span class="n">value</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">*</span><span class="mi">2</span>
-    <span class="k">return</span> <span class="n">value</span>
-   
-<span class="k">def</span> <span class="nf">bn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mi">2</span>
+<span class="k">def</span> <span class="nf">cn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">size</span>
 
-<span class="k">def</span> <span class="nf">An</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Cn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
    
-<span class="k">def</span> <span class="nf">Bn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">value</span>
-
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">An</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">&#39;?=?&#39;</span><span class="p">,</span> <span class="n">an</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="c1"># Série cossenos</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">Cn</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">&#39;?=?&#39;</span><span class="p">,</span> <span class="n">cn</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="c1"># Série cossenos</span>
     <span class="c1">#print(&#39;B&#39;,i, &quot;=&quot;, Bn(i), &#39;?=?&#39;, bn(i),&quot;=&quot;, &#39;b&#39;,i) #Série senos</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A 0 = 1.0 ?=? 1.998 = a 0
-A 1 = 0.5 ?=? -1.6576805317968435 = a 1
-A 2 = 0.3333333333333333 ?=? -0.8183429854566173 = a 2
-A 3 = 0.25 ?=? -0.003999973575200556 = a 3
-A 4 = 0.2 ?=? 0.4196769715600255 = a 4
-A 5 = 0.16666666666666666 ?=? 0.32314479326476014 = a 5
-A 6 = 0.14285714285714285 ?=? 0.003999894297659729 = a 6
-A 7 = 0.125 ?=? -0.24282403927082039 = a 7
-A 8 = 0.1111111111111111 ?=? -0.19934928551291825 = a 8
-A 9 = 0.1 ?=? -0.003999762157950869 = a 9
-A 10 = 0.09090909090909091 ?=? 0.17208619418516263 = a 10
-A 11 = 0.08333333333333333 ?=? 0.14308151760189058 = a 11
-A 12 = 0.07692307692307693 ?=? 0.003999577140356891 = a 12
-A 13 = 0.07142857142857142 ?=? -0.13399916420612049 = a 13
-A 14 = 0.06666666666666667 ?=? -0.11093078339242907 = a 14
-A 15 = 0.0625 ?=? -0.003999339222869537 = a 15
-A 16 = 0.058823529411764705 ?=? 0.11019688153031178 = a 16
-A 17 = 0.05555555555555555 ?=? 0.09012922832619497 = a 17
-A 18 = 0.05263157894736842 ?=? 0.003999048377183663 = a 18
-A 19 = 0.05 ?=? -0.09391290031356474 = a 19
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C 0 = 1.0 ?=? (1.002+0j) = c 0
+C 1 = 0.5 ?=? (-0.41517149272830817-0.7156256334215648j) = c 1
+C 2 = 0.3333333333333333 ?=? (-0.2038384857800134+0.35650588590460325j) = c 2
+C 3 = 0.25 ?=? (-0.004000052851169841+2.5183772918467184e-05j) = c 3
+C 4 = 0.2 ?=? (0.10567464275645819+0.17953633240109887j) = c 4
+C 5 = 0.16666666666666666 ?=? (0.08004309709258174-0.14206058334959873j) = c 5
+C 6 = 0.14285714285714285 ?=? (0.0040002114298212845-5.037153923453275e-05j) = c 6
+C 7 = 0.125 ?=? (-0.061465391696214115-0.10293880914772904j) = c 7
+C 8 = 0.1111111111111111 ?=? (-0.04909844076515652+0.08843727690227958j) = c 8
+C 9 = 0.1 ?=? (-0.0040004758114079945+7.556729509065008e-05j) = c 9
+C 10 = 0.09090909090909091 ?=? (0.043784855368949+0.07229054166771749j) = c 10
+C 11 = 0.08333333333333333 ?=? (0.03503578175962772-0.06405425350154531j) = c 11
+C 12 = 0.07692307692307693 ?=? (0.004000846121778977-0.00010077504212197752j) = c 12
+C 13 = 0.07142857142857142 ?=? (-0.03426696673363169-0.055780564953825086j) = c 13
+C 14 = 0.06666666666666667 ?=? (-0.027002444680977677+0.050114123682046596j) = c 14
+C 15 = 0.0625 ?=? (-0.004001322537318149+0.00012599879021393435j) = c 15
+C 16 = 0.058823529411764705 ?=? (0.028320209799134587+0.04545613634715771j) = c 16
+C 17 = 0.05555555555555555 ?=? (0.021806467058394167-0.041088241887518424j) = c 17
+C 18 = 0.05263157894736842 ?=? (0.004001905285141994-0.0001512425602713634j) = c 18
+C 19 = 0.05 ?=? (-0.02425297404132462-0.038387296870860524j) = c 19
 </pre></div>
 </div>
 </div>
@@ -633,22 +601,13 @@ A 19 = 0.05 ?=? -0.09391290031356474 = a 19
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Series_periodo_qualquer.html"
+       href="Expansao_par_impar.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(p = 2L\)</span></p>
+        <p class="prev-next-title">Expansão de meia escala</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="Serie_Fourier_complexa.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Série de fourier complexa</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

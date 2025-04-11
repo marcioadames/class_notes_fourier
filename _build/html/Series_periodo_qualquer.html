@@ -185,6 +185,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Series_periodo_pi.html">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(2\pi\)</span></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(p = 2L\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Expansao_par_impar.html">Expansão de meia escala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Serie_Fourier_complexa.html">Série de fourier complexa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Oscilacoes_forcadas.html">Oscilações forçadas</a></li>
 </ul>
 
     </div>
@@ -391,21 +393,27 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1">#semi-período</span>
-<span class="n">L</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">100</span>
 
 <span class="c1">#número de cosenos e senos na série </span>
-<span class="n">num_termos</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">num_termos</span> <span class="o">=</span> <span class="mi">30</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="c1">#número de períodos</span>
+<span class="n">var</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">var</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="n">var</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
 
 <span class="c1">#y = np.heaviside(x,0)*(x-np.pi)**2/np.pi+np.heaviside(-x,0)*(x+np.pi)**2/np.pi</span>
 
 <span class="c1"># a0 inicial da série</span>
-<span class="n">a0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">a0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
 <span class="k">def</span> <span class="nf">an</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">n</span>
-    <span class="k">return</span> <span class="n">value</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">n</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">value</span>
    
 <span class="k">def</span> <span class="nf">bn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
@@ -419,14 +427,14 @@ document.write(`
 
 <span class="n">y2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num_termos</span><span class="p">)</span>
 
-<span class="c1">#plt.plot(x, y)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="n">var</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="n">var</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mf">1.1</span><span class="o">*</span><span class="n">y2</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="mf">1.1</span><span class="o">*</span><span class="n">y2</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f6dd476af7b2feccf90fac69d621ea7928f7963fb4405079421a8e156f904ed1.png" src="_images/f6dd476af7b2feccf90fac69d621ea7928f7963fb4405079421a8e156f904ed1.png" />
+<img alt="_images/29a4e7eba03ab61c0c826e92685811d5eafd06701f13c17e4219c24f3dc97872.png" src="_images/29a4e7eba03ab61c0c826e92685811d5eafd06701f13c17e4219c24f3dc97872.png" />
 </div>
 </div>
 <div class="cell docutils container">

@@ -9,3 +9,5 @@ chapters:
 - file: Expansao_par_impar
 - file: Serie_Fourier_complexa
 - file: Oscilacoes_forcadas
+- file: equacao_calor_finita
+- file: equacao_onda_finita

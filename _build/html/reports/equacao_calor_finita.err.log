@@ -1,0 +1,160 @@
+Traceback (most recent call last):
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marcio/anaconda3/lib/python3.12/asyncio/base_events.py", line 685, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import plotly.graph_objects as go
+
+#Temperatura zero nas extremidades - série de senos
+#Isolada nas extremidades - série de cossenos
+
+
+
+#Difusividade térmica
+c2 = 0.1
+
+
+#comprimento da barra
+L = 1
+
+#número de cosenos e senos na série 
+num_termos = 20
+
+# variável do comprimento
+
+x = np.linspace(0,L,500)
+
+# variável do tempo em segundos
+t_max = 1
+t = np.linspace(0,t_max,20)
+
+yy = np.heaviside(L/2-x,1)*(x)*2/L + np.heaviside(x-L/2,1)*(L-x)*2/L
+
+# a0 inicial da série
+a0 = 0
+
+'''
+def an(n):
+    value = 0
+    return value
+#'''
+
+#""" an calculado pela máquina - coloque # no início dessa linha para habilitar
+def an(n):
+    val = yy*np.cos(n*np.pi*x/L)
+    value = val.sum()/c.size
+    if n==0:
+        value=value
+    else:
+        value=value*2
+    return value
+a0=an(0)
+#"""
+
+#'''   
+def bn(n):
+    value = 0#(8/(n**2*np.pi**2))*np.sin(n*np.pi/2)
+    return value
+#'''
+
+
+""" bn calculado pela máquina - coloque # no início dessa linha para habilitar
+def bn(n):
+    val = yy*np.sin(n*np.pi*x/L)
+    return val.sum()/val.size*2
+#"""
+
+N=20
+
+def ff(x, tt, N):
+    len_x=len(x)
+    fun = np.zeros(len_x)
+    fun=fun+a0
+    for i in range(1,N+1):
+        for j in range(len_x):
+            fun[j] = fun[j]+(an(i)*np.cos(i*np.pi*x[j]/L)+bn(i)*np.sin(i*np.pi*x[j]/L))*np.exp(-c2*i**2*np.pi**2/L**2*tt)
+    return fun
+
+# Create figure
+ymin = 0 #mínimo para eixo y
+ymax = 1 #máximo para eixo y
+fig = go.Figure(layout_yaxis_range=[ymin, ymax])
+
+
+# Add traces, one for each slider step
+for step in np.arange(0, t_max, 0.1):
+    trace=go.Scatter(
+            visible=False,
+            line=dict(color="#00CED1", width=6),
+            name="𝜈 = " + str(step),
+            y = ff(x,step,N),
+        )
+    fig.add_trace(
+        trace)
+
+# Make 10th trace visible
+fig.data[0].visible = True
+
+# Create and add slider
+steps = []
+for i in range(len(fig.data)):
+    step = dict(
+        method="update",
+        args=[{"visible": [False] * len(fig.data)},
+              {"title": "Time: " + str(i/10)}],  # layout attribute
+    )
+    step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+    steps.append(step)
+
+sliders = [dict(
+    active=0,
+    currentvalue={"prefix": "Time: "},
+    pad={"t": 10},
+    steps=steps
+)]
+
+fig.update_layout(
+    sliders=sliders
+)
+
+fig.show()
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[2], line 47[0m
+[1;32m     45[0m         value[38;5;241m=[39mvalue[38;5;241m*[39m[38;5;241m2[39m
+[1;32m     46[0m     [38;5;28;01mreturn[39;00m value
+[0;32m---> 47[0m a0[38;5;241m=[39man([38;5;241m0[39m)
+[1;32m     48[0m [38;5;66;03m#"""[39;00m
+[1;32m     49[0m 
+[1;32m     50[0m [38;5;66;03m#'''   [39;00m
+[1;32m     51[0m [38;5;28;01mdef[39;00m [38;5;21mbn[39m(n):
+
+Cell [0;32mIn[2], line 41[0m, in [0;36man[0;34m(n)[0m
+[1;32m     39[0m [38;5;28;01mdef[39;00m [38;5;21man[39m(n):
+[1;32m     40[0m     val [38;5;241m=[39m yy[38;5;241m*[39mnp[38;5;241m.[39mcos(n[38;5;241m*[39mnp[38;5;241m.[39mpi[38;5;241m*[39mx[38;5;241m/[39mL)
+[0;32m---> 41[0m     value [38;5;241m=[39m val[38;5;241m.[39msum()[38;5;241m/[39mc[38;5;241m.[39msize
+[1;32m     42[0m     [38;5;28;01mif[39;00m n[38;5;241m==[39m[38;5;241m0[39m:
+[1;32m     43[0m         value[38;5;241m=[39mvalue
+
+[0;31mNameError[0m: name 'c' is not defined
+

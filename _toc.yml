@@ -11,3 +11,5 @@ chapters:
 - file: Oscilacoes_forcadas
 - file: equacao_calor_finita
 - file: equacao_onda_finita
+- file: Transf_Fourier_comp
+- file: Transf_Fourier_comp-NUMERICA

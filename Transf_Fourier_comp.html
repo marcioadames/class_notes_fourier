@@ -6,8 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; My sample book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Transformada de Fourier complexa simbólica &#8212; My sample book</title>
   
   
   
@@ -56,10 +57,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Transf_Fourier_comp';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Transformada de Fourier complexa numérica" href="Transf_Fourier_comp-NUMERICA.html" />
+    <link rel="prev" title="Equação da onda em uma barra finita" href="equacao_onda_finita.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -179,7 +180,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Series_periodo_pi.html">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(2\pi\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Series_periodo_qualquer.html">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(p = 2L\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Expansao_par_impar.html">Expansão de meia escala</a></li>
@@ -187,7 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Oscilacoes_forcadas.html">Oscilações forçadas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equacao_calor_finita.html">Equação do calor em uma barra finita</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equacao_onda_finita.html">Equação da onda em uma barra finita</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Transf_Fourier_comp.html">Transformada de Fourier complexa simbólica</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Transformada de Fourier complexa simbólica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Transf_Fourier_comp-NUMERICA.html">Transformada de Fourier complexa numérica</a></li>
 </ul>
 
@@ -260,7 +261,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTransf_Fourier_comp.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -272,6 +273,54 @@
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Transf_Fourier_comp.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -324,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>Transformada de Fourier complexa simbólica</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -338,13 +387,126 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="transformada-de-fourier-complexa-simbolica">
+<h1>Transformada de Fourier complexa simbólica<a class="headerlink" href="#transformada-de-fourier-complexa-simbolica" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import fourier_transform</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span>
 
-<h1 id="index">Index</h1>
+<span class="c1"># Definindo uma função simbólica</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-<div class="genindex-jumpbox">
- 
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1">#f = Piecewise( ( 1, (x &gt; -1) &amp; (x &lt; 1) ), (0, True))</span>
+
+<span class="c1">#f = Piecewise( ( 1, (x &gt; 0)), (0, True))</span>
+
+<span class="c1"># Calculando a Transformada de Fourier</span>
+<span class="n">F_f</span> <span class="o">=</span> <span class="n">fourier_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">F_f</span><span class="p">)</span>
+
+<span class="c1"># Calculando a transformada inversa</span>
+
+<span class="n">ff</span> <span class="o">=</span> <span class="n">inverse_fourier_transform</span><span class="p">(</span><span class="n">F_f</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
+
+<span class="c1"># o símbolo &quot;|&quot; significa &quot;ou&quot;</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>exp(-x**2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sqrt(pi)*exp(-pi**2*w**2)
+exp(-x**2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import fourier_transform</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span>
 
+<span class="c1"># Definindo uma função simbólica</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1">#f = Piecewise( ( 1, (x &gt; -1) &amp; (x &lt; 1) ), (0, True))</span>
+
+<span class="c1">#f = Piecewise( ( 1, (x &gt; 0)), (0, True))</span>
+
+<span class="c1"># Calculando a Transformada de Fourier</span>
+<span class="n">F_f</span> <span class="o">=</span> <span class="n">fourier_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="c1"># Calculando a transformada inversa</span>
+
+<span class="n">ff</span> <span class="o">=</span> <span class="n">inverse_fourier_transform</span><span class="p">(</span><span class="n">F_f</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="c1"># Plotando a função</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Plotando a transformada</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">F_f</span><span class="p">)</span>
+
+<span class="c1"># Tentando plotar a transformada INVERSA</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>exp(-x**2)
+</pre></div>
+</div>
+<img alt="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" src="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" />
+<img alt="_images/3fa8d6d459c81e15a2b6ad7da6c74d57ec03029d9df2e26a7652c734a410deab.png" src="_images/3fa8d6d459c81e15a2b6ad7da6c74d57ec03029d9df2e26a7652c734a410deab.png" />
+<img alt="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" src="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.backends.matplotlibbackend.matplotlib.MatplotlibBackend at 0x72f3f5b7ed80&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%html</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;margin-top:0px;margin-left:-20px;&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://python-fiddle.com/&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;1200&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;600&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe style="margin-top:0px;margin-left:-20px;" src="https://python-fiddle.com/" width="1200" height="600"></iframe>
+</div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -356,6 +518,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="equacao_onda_finita.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Equação da onda em uma barra finita</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Transf_Fourier_comp-NUMERICA.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Transformada de Fourier complexa numérica</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

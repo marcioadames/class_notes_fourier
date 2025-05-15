@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -435,6 +435,8 @@ exp(-x**2)
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span>
 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 <span class="c1"># Definindo uma função simbólica</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
@@ -460,6 +462,8 @@ exp(-x**2)
 
 <span class="c1"># Tentando plotar a transformada INVERSA</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -470,9 +474,6 @@ exp(-x**2)
 <img alt="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" src="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" />
 <img alt="_images/3fa8d6d459c81e15a2b6ad7da6c74d57ec03029d9df2e26a7652c734a410deab.png" src="_images/3fa8d6d459c81e15a2b6ad7da6c74d57ec03029d9df2e26a7652c734a410deab.png" />
 <img alt="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" src="_images/32fd9a1e839ead2cfb86203b4e0a3b78260494b6e3682a1f9351d902acd0606e.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sympy.plotting.backends.matplotlibbackend.matplotlib.MatplotlibBackend at 0x72f3f5b7ed80&gt;
-</pre></div>
-</div>
 </div>
 </div>
 <div class="cell docutils container">

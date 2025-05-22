@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Introdução &#8212; My sample book</title>
+    <title>Transformada de Fourier complexa simbólica &#8212; My sample book</title>
   
   
   
@@ -57,13 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Transf_Fourier_aplicacao';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Série de Fourier de funções de período \(2\pi\)" href="Series_periodo_pi.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -146,7 +143,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="Intro.html">
   
   
   
@@ -177,8 +174,8 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
                     Introdução
                 </a>
             </li>
@@ -265,7 +262,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FIntro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTransf_Fourier_aplicacao.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -295,7 +292,7 @@
       
       
       
-      <li><a href="_sources/Intro.ipynb" target="_blank"
+      <li><a href="_sources/Transf_Fourier_aplicacao.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -377,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introdução</h1>
+    <h1>Transformada de Fourier complexa simbólica</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -391,13 +388,112 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introducao">
-<h1>Introdução<a class="headerlink" href="#introducao" title="Link to this heading">#</a></h1>
-<p>Essas são notas de aula sobre Séries de Fourier</p>
-<p><span class="math notranslate nohighlight">\(
-f(x) = a_0 +\sum_{i=1}^\infty a_n \mbox{cos}(nx) + b_n\mbox{sin}(nx)
-\)</span></p>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="transformada-de-fourier-complexa-simbolica">
+<h1>Transformada de Fourier complexa simbólica<a class="headerlink" href="#transformada-de-fourier-complexa-simbolica" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.io.wavfile</span> <span class="c1"># For reading/writing wav files</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">embed</span> <span class="c1"># For debugging</span>
+
+<span class="c1"># Read the input wav file</span>
+<span class="p">[</span><span class="n">samplerate</span><span class="p">,</span> <span class="n">audio</span><span class="p">]</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">wavfile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;nuisance.wav&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get a few seconds of this audio</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="n">samplerate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">32768</span><span class="o">*</span><span class="mi">6</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">audio</span><span class="p">[</span><span class="n">offset</span><span class="p">:(</span><span class="n">offset</span><span class="o">+</span><span class="n">n</span><span class="p">),</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># audio is stereo; just grab one channel</span>
+
+<span class="c1"># Compute the FFT to get the frequency-domain representation</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Experiment with various filters:</span>
+
+<span class="c1"># 1) Throw away all the high frequencies</span>
+<span class="c1">#Note that the FFT is symmetrical, and the highest frequency is halfway</span>
+<span class="c1"># keepFraction = 20</span>
+<span class="c1"># yMod = np.array(y)</span>
+<span class="c1"># yMod[(n/keepFraction):-(n/keepFraction)] = 0</span>
+
+<span class="c1"># 2) Throw away all the low frequencies</span>
+<span class="c1"># keepFraction = 20</span>
+<span class="c1"># yMod = np.array(y)</span>
+<span class="c1"># yMod[0:(n/keepFraction)] = 0</span>
+<span class="c1"># yMod[-(n/keepFraction):-1] = 0</span>
+
+<span class="c1"># 3) Shift the frequencies (really nasty auto-tuner)</span>
+<span class="n">yMod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+  <span class="n">oldfreq</span> <span class="o">=</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">f</span>
+  <span class="n">yMod</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">oldfreq</span><span class="p">)]</span>
+  <span class="n">yMod</span><span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">oldfreq</span><span class="p">)]</span>
+  <span class="c1"># yMod[f] = y[min(f + 1000, n/2)]</span>
+  <span class="c1"># yMod[-f] = y[-min(f + 1000, n/2)]</span>
+
+
+<span class="c1"># Plot the results, if they&#39;re small enough</span>
+<span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">:</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">yMod</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Play the input and result for comparison</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">samplerate</span><span class="p">)</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="c1"># Take the inverse FFT to get the audio back, and play it</span>
+<span class="n">xMod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">yMod</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">xMod</span><span class="p">,</span> <span class="n">samplerate</span><span class="p">)</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">embed</span> <span class="c1"># For debugging</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Read the input wav file</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="p">[</span><span class="n">samplerate</span><span class="p">,</span> <span class="n">audio</span><span class="p">]</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">wavfile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;nuisance.wav&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Get a few seconds of this audio</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">samplerate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/scipy/io/wavfile.py:647,</span> in <span class="ni">read</span><span class="nt">(filename, mmap)</span>
+<span class="g g-Whitespace">    </span><span class="mi">645</span>     <span class="n">mmap</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">646</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">647</span>     <span class="n">fid</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">650</span>     <span class="n">file_size</span><span class="p">,</span> <span class="n">is_big_endian</span> <span class="o">=</span> <span class="n">_read_riff_chunk</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;nuisance.wav&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%html</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;margin-top:0px;margin-left:-20px;&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://python-fiddle.com/&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;1200&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;600&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">PortAudio</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ERROR: Could not find a version that satisfies the requirement PortAudio (from versions: none)</span>
+<span class=" -Color -Color-Red">ERROR: No matching distribution found for PortAudio</span>
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 
@@ -431,15 +527,6 @@ f(x) = a_0 +\sum_{i=1}^\infty a_n \mbox{cos}(nx) + b_n\mbox{sin}(nx)
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="Series_periodo_pi.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(2\pi\)</span></p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

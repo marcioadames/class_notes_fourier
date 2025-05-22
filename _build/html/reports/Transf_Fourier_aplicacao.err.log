@@ -1,0 +1,98 @@
+Traceback (most recent call last):
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marcio/anaconda3/lib/python3.12/asyncio/base_events.py", line 685, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/marcio/anaconda3/lib/python3.12/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.io.wavfile # For reading/writing wav files
+from IPython import embed # For debugging
+
+# Read the input wav file
+[samplerate, audio] = scipy.io.wavfile.read('nuisance.wav')
+
+# Get a few seconds of this audio
+offset = samplerate * np.random.randint(100)
+print(offset)
+n = 32768*6
+x = audio[offset:(offset+n), 0] # audio is stereo; just grab one channel
+
+# Compute the FFT to get the frequency-domain representation
+y = np.fft.fft(x)
+
+# Experiment with various filters:
+
+# 1) Throw away all the high frequencies
+#Note that the FFT is symmetrical, and the highest frequency is halfway
+# keepFraction = 20
+# yMod = np.array(y)
+# yMod[(n/keepFraction):-(n/keepFraction)] = 0
+
+# 2) Throw away all the low frequencies
+# keepFraction = 20
+# yMod = np.array(y)
+# yMod[0:(n/keepFraction)] = 0
+# yMod[-(n/keepFraction):-1] = 0
+
+# 3) Shift the frequencies (really nasty auto-tuner)
+yMod = np.zeros(n, dtype=np.complex128)
+
+for f in range(n / 2):
+  oldfreq = 0.95 * f
+  yMod[f] = y[np.floor(oldfreq)]
+  yMod[-f] = y[-np.floor(oldfreq)]
+  # yMod[f] = y[min(f + 1000, n/2)]
+  # yMod[-f] = y[-min(f + 1000, n/2)]
+
+
+# Plot the results, if they're small enough
+if n < 10000:
+  plt.plot(np.real(y))
+  plt.plot(np.real(yMod))
+  plt.show()
+
+# Play the input and result for comparison
+sd.play(x, samplerate)
+sd.wait()
+
+# Take the inverse FFT to get the audio back, and play it
+xMod = np.real(np.fft.ifft(yMod)).astype(np.int16)
+sd.play(xMod, samplerate)
+sd.wait()
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [0;32mIn[1], line 7[0m
+[1;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mIPython[39;00m [38;5;28;01mimport[39;00m embed [38;5;66;03m# For debugging[39;00m
+[1;32m      6[0m [38;5;66;03m# Read the input wav file[39;00m
+[0;32m----> 7[0m [samplerate, audio] [38;5;241m=[39m scipy[38;5;241m.[39mio[38;5;241m.[39mwavfile[38;5;241m.[39mread([38;5;124m'[39m[38;5;124mnuisance.wav[39m[38;5;124m'[39m)
+[1;32m      9[0m [38;5;66;03m# Get a few seconds of this audio[39;00m
+[1;32m     10[0m offset [38;5;241m=[39m samplerate [38;5;241m*[39m np[38;5;241m.[39mrandom[38;5;241m.[39mrandint([38;5;241m100[39m)
+
+File [0;32m~/anaconda3/lib/python3.12/site-packages/scipy/io/wavfile.py:647[0m, in [0;36mread[0;34m(filename, mmap)[0m
+[1;32m    645[0m     mmap [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[1;32m    646[0m [38;5;28;01melse[39;00m:
+[0;32m--> 647[0m     fid [38;5;241m=[39m [38;5;28mopen[39m(filename, [38;5;124m'[39m[38;5;124mrb[39m[38;5;124m'[39m)
+[1;32m    649[0m [38;5;28;01mtry[39;00m:
+[1;32m    650[0m     file_size, is_big_endian [38;5;241m=[39m _read_riff_chunk(fid)
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'nuisance.wav'
+

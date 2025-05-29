@@ -423,13 +423,13 @@ document.write(`
 
 
 <span class="c1"># removendo frequencias pequenas</span>
-<span class="c1">#&quot;&quot;&quot;</span>
-<span class="n">cut</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&lt;</span> <span class="n">cut</span><span class="p">:</span>
-        <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">cut = 1</span>
+<span class="sd">for i in range(len(F_f)):</span>
+<span class="sd">    if abs(F_f[i])&lt; cut:</span>
+<span class="sd">        F_f[i] = 0 </span>
 
-<span class="c1">#&quot;&quot;&quot;</span>
+<span class="sd">#&quot;&quot;&quot;</span>
 
 <span class="c1"># Calculando a transformada inversa</span>
 
@@ -460,141 +460,7 @@ document.write(`
   return np.asarray(x, float)
 </pre></div>
 </div>
-<img alt="_images/c69830e96c24d626ab18d0712cbf03f8d2fc68ca5bf9a96ef6e5490c16c6d6c1.png" src="_images/c69830e96c24d626ab18d0712cbf03f8d2fc68ca5bf9a96ef6e5490c16c6d6c1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># intervalo de interesse (-a,a)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">10</span> 
-<span class="n">numpoints</span> <span class="o">=</span> <span class="mi">101</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">a</span><span class="p">,</span> <span class="n">numpoints</span><span class="p">,</span> <span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-
-<span class="c1"># Definindo um sinal randômico</span>
-<span class="n">noise_freq</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">coef</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
-<span class="n">coeff</span> <span class="o">=</span>  <span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">rr</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">f</span> <span class="o">=</span> <span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">coef</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">+</span><span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">rr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-
-
-<span class="c1"># Calculando a DFT</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">numpoints</span><span class="p">,</span><span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">F_f</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-        <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">numpoints</span><span class="p">)</span>
-<span class="n">F_f</span> <span class="o">=</span> <span class="n">F_f</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-
-<span class="c1"># removendo frequencias pequenas</span>
-<span class="c1">#&quot;&quot;&quot;</span>
-<span class="n">cut</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&lt;</span> <span class="n">cut</span><span class="p">:</span>
-        <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> 
-
-<span class="c1">#&quot;&quot;&quot;</span>
-
-<span class="c1"># Calculando a transformada inversa</span>
-
-<span class="n">ff</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ff</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-        <span class="n">ff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">F_f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">numpoints</span><span class="p">)</span>
-<span class="n">ff</span> <span class="o">=</span> <span class="n">ff</span>
-
-
-<span class="c1"># Plotando a função</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-
-<span class="c1"># Plotando a transformada</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">F_f</span><span class="p">))</span>
-
-<span class="c1"># Tentando plotar a transformada INVERSA</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">ff</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/16468fbedcf1f7b916a3405c650535216aeb8d4b0b7fb1fc2d80fbdd443c5d34.png" src="_images/16468fbedcf1f7b916a3405c650535216aeb8d4b0b7fb1fc2d80fbdd443c5d34.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># intervalo de interesse (-a,a)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">10</span> 
-<span class="n">numpoints</span> <span class="o">=</span> <span class="mi">101</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">a</span><span class="p">,</span> <span class="n">numpoints</span><span class="p">,</span> <span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-
-<span class="c1"># Definindo um sinal randômico</span>
-<span class="n">noise_freq</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">coef</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
-<span class="n">coeff</span> <span class="o">=</span>  <span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">rr</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">f</span> <span class="o">=</span> <span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">coef</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">+</span><span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">rr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-
-
-<span class="c1"># Calculando a DFT</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">numpoints</span><span class="p">,</span><span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">F_f</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-        <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">numpoints</span><span class="p">)</span>
-<span class="n">F_f</span> <span class="o">=</span> <span class="n">F_f</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-
-<span class="c1"># removendo frequencias pequenas</span>
-<span class="c1">#&quot;&quot;&quot;</span>
-<span class="n">cut</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&lt;</span> <span class="n">cut</span><span class="p">:</span>
-        <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> 
-
-<span class="c1">#&quot;&quot;&quot;</span>
-
-<span class="c1"># Calculando a transformada inversa</span>
-
-<span class="n">ff</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ff</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-        <span class="n">ff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">F_f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">numpoints</span><span class="p">)</span>
-<span class="n">ff</span> <span class="o">=</span> <span class="n">ff</span>
-
-
-<span class="c1"># Plotando a função</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
-
-<span class="c1"># Plotando a transformada</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">F_f</span><span class="p">))</span>
-
-<span class="c1"># Tentando plotar a transformada INVERSA</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">ff</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f016c23c531bc16a84493b71bb3d324194d3dbafbe519fb299cd45bc8092c825.png" src="_images/f016c23c531bc16a84493b71bb3d324194d3dbafbe519fb299cd45bc8092c825.png" />
+<img alt="_images/e6621217e90cf4aa872207034fa6693f92fd121ac8d1084a44b39877132d86b8.png" src="_images/e6621217e90cf4aa872207034fa6693f92fd121ac8d1084a44b39877132d86b8.png" />
 </div>
 </div>
 <div class="cell docutils container">

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Transformada de Discreta Fourier (DFT) &#8212; My sample book</title>
+    <title>&lt;no title&gt; &#8212; My sample book</title>
   
   
   
@@ -57,12 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Discrete_Fourier_Transform';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'noise_removal';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="noise_removal.html" />
-    <link rel="prev" title="Equação do calor em uma barra infinita (reta toda)" href="equacao_calor_barra_inf.html" />
+    <link rel="prev" title="Transformada de Discreta Fourier (DFT)" href="Discrete_Fourier_Transform.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,7 +179,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Series_periodo_pi.html">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(2\pi\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Series_periodo_qualquer.html">Série de Fourier de funções de período <span class="math notranslate nohighlight">\(p = 2L\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Expansao_par_impar.html">Expansão de meia escala</a></li>
@@ -191,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Transf_Fourier_comp.html">Transformada de Fourier complexa simbólica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Transf_Fourier_comp-NUMERICA.html">Transformada de Fourier complexa numérica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equacao_calor_barra_inf.html">Equação do calor em uma barra infinita (reta toda)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Transformada de Discreta Fourier (DFT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Discrete_Fourier_Transform.html">Transformada de Discreta Fourier (DFT)</a></li>
 </ul>
 
     </div>
@@ -263,7 +262,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FDiscrete_Fourier_Transform.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnoise_removal.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -293,7 +292,7 @@
       
       
       
-      <li><a href="_sources/Discrete_Fourier_Transform.ipynb" target="_blank"
+      <li><a href="_sources/noise_removal.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -364,7 +363,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -375,11 +376,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Transformada de Discreta Fourier (DFT)</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -389,67 +398,127 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="transformada-de-discreta-fourier-dft">
-<h1>Transformada de Discreta Fourier (DFT)<a class="headerlink" href="#transformada-de-discreta-fourier-dft" title="Link to this heading">#</a></h1>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports for Audio signal processing</span>
+<span class="kn">from</span> <span class="nn">scipy.io.wavfile</span> <span class="kn">import</span> <span class="n">read</span><span class="p">,</span> <span class="n">write</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftfreq</span><span class="p">,</span> <span class="n">ifft</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+    
+  
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># intervalo de interesse (-a,a)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">10</span> 
-<span class="n">numpoints</span> <span class="o">=</span> <span class="mi">101</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">a</span><span class="p">,</span> <span class="n">numpoints</span><span class="p">,</span> <span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-
-<span class="c1"># Definindo um sinal randômico</span>
-<span class="n">noise_freq</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">coef</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
-<span class="n">coeff</span> <span class="o">=</span>  <span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">rr</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">f</span> <span class="o">=</span> <span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">coef</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">noise_freq</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">+</span><span class="n">coeff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">rr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-
-
-<span class="c1"># Calculando a DFT</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">numpoints</span><span class="p">,</span><span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">F_f</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-        <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">F_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">numpoints</span><span class="p">)</span>
-<span class="n">F_f</span> <span class="o">=</span> <span class="n">F_f</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-
-<span class="c1"># removendo frequencias pequenas</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># converter audio.mp3 para audio.wav, se necessário</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">cut = 1</span>
-<span class="sd">for i in range(len(F_f)):</span>
-<span class="sd">    if abs(F_f[i])&lt; cut:</span>
-<span class="sd">        F_f[i] = 0 </span>
+<span class="sd">from pydub import AudioSegment</span>
+<span class="sd">sound = AudioSegment.from_mp3(&quot;audio.mp3&quot;)</span>
+<span class="sd">sound.export(&quot;audio.wav&quot;, format=&quot;wav&quot;)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\nfrom pydub import AudioSegment\nsound = AudioSegment.from_mp3(&quot;audio.mp3&quot;)\nsound.export(&quot;audio.wav&quot;, format=&quot;wav&quot;)\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importar e mostrar audio original</span>
 
-<span class="sd">#&quot;&quot;&quot;</span>
 
-<span class="c1"># Calculando a transformada inversa</span>
+<span class="c1"># Import the .wav format audio into two variables: </span>
+<span class="c1"># sampling (int)</span>
+<span class="c1"># audio signal (numpy array)</span>
 
-<span class="n">ff</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ff</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F_f</span><span class="p">)):</span>
-        <span class="n">ff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">F_f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">numpoints</span><span class="p">)</span>
-<span class="n">ff</span> <span class="o">=</span> <span class="n">ff</span>
+<span class="n">sampling</span><span class="p">,</span> <span class="n">signal</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;audio.wav&#39;</span><span class="p">)</span>
 
 
-<span class="c1"># Plotando a função</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="c1"># time duration of the audio</span>
+<span class="n">length</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">sampling</span>
 
-<span class="c1"># Plotando a transformada</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">F_f</span><span class="p">))</span>
+<span class="c1"># x axis based on the time duration</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot do sinal original</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Original signal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7d94a4941c0e6fd83f4b850cd53480c3208b2e37d649e156084173ff21b344c2.png" src="_images/7d94a4941c0e6fd83f4b850cd53480c3208b2e37d649e156084173ff21b344c2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aplicar a transformada de fourier, normalizar e plotar</span>
+<span class="n">transform</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
 
-<span class="c1"># Tentando plotar a transformada INVERSA</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">real</span><span class="p">(</span><span class="n">ff</span><span class="p">))</span>
+<span class="c1"># obtain frequencies</span>
+<span class="n">xf</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">sampling</span><span class="p">)</span> 
 
+<span class="c1"># show transformed signal (frequencies domain)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">transform</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuency (Hz)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Frequency domain signal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d2f43998b12d67782fdebe7b4fec3298442c8fe9401992bed81bc7bafac47b8c.png" src="_images/d2f43998b12d67782fdebe7b4fec3298442c8fe9401992bed81bc7bafac47b8c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># filtrar a transformada do sinal para 40% da amplitude máxima</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span><span class="o">*</span><span class="mf">0.4</span>
+<span class="n">filtered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">filtered</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">transform</span><span class="p">))]</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+
+<span class="c1"># Plotar a transformada filtrada</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">filtered</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuency (Hz)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;FILTERED time domain signal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/63073fd75265aab9088b3517670857261ea2062b1d28054240a250f46dfc2034.png" src="_images/63073fd75265aab9088b3517670857261ea2062b1d28054240a250f46dfc2034.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reconstruir o audio a partir dos dados filtrados e plotar</span>
+<span class="n">filtered</span> <span class="o">=</span> <span class="n">ifft</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
+
+<span class="c1"># show original signal filtered</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">filtered</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Filtered signal&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -461,21 +530,38 @@ document.write(`
   return np.asarray(x, float)
 </pre></div>
 </div>
-<img alt="_images/e6621217e90cf4aa872207034fa6693f92fd121ac8d1084a44b39877132d86b8.png" src="_images/e6621217e90cf4aa872207034fa6693f92fd121ac8d1084a44b39877132d86b8.png" />
+<img alt="_images/fde68cf5021513250ee547bc994adc8fd296d7da982c1ae699f303f474e8281a.png" src="_images/fde68cf5021513250ee547bc994adc8fd296d7da982c1ae699f303f474e8281a.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%html</span>
-<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;margin-top:0px;margin-left:-20px;&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://python-fiddle.com/&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;1200&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;600&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar wav a partie do audio reconstruido</span>
+
+<span class="n">rate</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="n">write</span><span class="p">(</span><span class="s1">&#39;test.wav&#39;</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exportar wav para mp3</span>
+
+
+<span class="c1">#&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">pydub</span> <span class="kn">import</span> <span class="n">AudioSegment</span>
+<span class="n">sound</span> <span class="o">=</span> <span class="n">AudioSegment</span><span class="o">.</span><span class="n">from_mp3</span><span class="p">(</span><span class="s2">&quot;test.wav&quot;</span><span class="p">)</span>
+<span class="n">sound</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">&quot;test.mp3&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;mp3&quot;</span><span class="p">)</span>
+<span class="c1">#&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><iframe style="margin-top:0px;margin-left:-20px;" src="https://python-fiddle.com/" width="1200" height="600"></iframe>
-</div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;_io.BufferedRandom name=&#39;test.mp3&#39;&gt;
+</pre></div>
 </div>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -508,22 +594,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="equacao_calor_barra_inf.html"
+       href="Discrete_Fourier_Transform.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Equação do calor em uma barra infinita (reta toda)</p>
+        <p class="prev-next-title">Transformada de Discreta Fourier (DFT)</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="noise_removal.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -531,6 +608,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

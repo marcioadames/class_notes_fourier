@@ -14,3 +14,5 @@ chapters:
 - file: Transf_Fourier_comp
 - file: Transf_Fourier_comp-NUMERICA
 - file: equacao_calor_barra_inf
+- file: Discrete_Fourier_Transform.ipynb
+- file: noise_removal

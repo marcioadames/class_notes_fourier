@@ -483,9 +483,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># filtrar a transformada do sinal para 40% da amplitude máxima</span>
-<span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span><span class="o">*</span><span class="mf">0.4</span>
 <span class="n">filtered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span>
-<span class="n">filtered</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">transform</span><span class="p">))]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">filtered</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">transform</span><span class="p">))]</span> <span class="o">=</span> <span class="mi">0</span>
 
 
 
@@ -499,7 +498,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/63073fd75265aab9088b3517670857261ea2062b1d28054240a250f46dfc2034.png" src="_images/63073fd75265aab9088b3517670857261ea2062b1d28054240a250f46dfc2034.png" />
+<img alt="_images/3a13c8ad974c00270de705f95a5059fa7b332ed30f4603d4d1f210bba5ae1e11.png" src="_images/3a13c8ad974c00270de705f95a5059fa7b332ed30f4603d4d1f210bba5ae1e11.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -523,15 +522,21 @@ document.write(`
   return np.asarray(x, float)
 </pre></div>
 </div>
-<img alt="_images/fde68cf5021513250ee547bc994adc8fd296d7da982c1ae699f303f474e8281a.png" src="_images/fde68cf5021513250ee547bc994adc8fd296d7da982c1ae699f303f474e8281a.png" />
+<img alt="_images/b1d2ee45b7e3583281d77f1cf4d862f416f7200487c1c514cfd0a592d2e0a181.png" src="_images/b1d2ee45b7e3583281d77f1cf4d862f416f7200487c1c514cfd0a592d2e0a181.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar wav a partie do audio reconstruido</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar wav a partir do audio reconstruido</span>
 
 <span class="n">rate</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="n">write</span><span class="p">(</span><span class="s1">&#39;test.wav&#39;</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
+<span class="n">write</span><span class="p">(</span><span class="s1">&#39;test.wav&#39;</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">filtered</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_566962/2202015958.py:4: ComplexWarning: Casting complex values to real discards the imaginary part
+  write(&#39;test.wav&#39;, rate, filtered.astype(signal.dtype))
 </pre></div>
 </div>
 </div>
